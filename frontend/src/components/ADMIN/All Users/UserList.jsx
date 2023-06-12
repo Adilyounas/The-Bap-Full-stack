@@ -40,9 +40,14 @@ const UserList = ({ mode, loadUserSuccess }) => {
 
   // *{<------------------------------- USE SELECTOR ------------------------------------->}
 
-  const { generalLoading } = useSelector((state) => state.generalLoading);
+  const { generalLoading } = useSelector(
+    (state) => state.generalLoading
+  );
+
   const { Users } = useSelector((state) => state.AllUserList);
   const { bgColors } = useSelector((state) => state.Colors);
+  const { deleteUser_Success } = useSelector((state) => state.DeleteUser);
+
 
   // *{<------------------------------- USESTATE ------------------------------------->}
   const [userId, setUserId] = useState("");
@@ -154,9 +159,12 @@ const UserList = ({ mode, loadUserSuccess }) => {
     if (loadUserSuccess === false) {
       history("/register");
     } else {
+      if (deleteUser_Success === true) {
+        dispatch(getUserListAction());
+      }
       dispatch(getUserListAction());
     }
-  }, [dispatch, loadUserSuccess, history]);
+  }, [dispatch, loadUserSuccess, history,deleteUser_Success]);
 
   // *{<------------------------------- RETURN STATEMENET ------------------------------------->}
 
@@ -173,7 +181,9 @@ const UserList = ({ mode, loadUserSuccess }) => {
             color: mode ? "#ffffff" : "#000000",
           }}
         >
-          <Typography style={{color:bgColors?bgColors:""}}>All Users</Typography>
+          <Typography style={{ color: bgColors ? bgColors : "" }}>
+            All Users
+          </Typography>
           <Dialog open={open} onClose={() => setOpen(!open)}>
             <DialogTitle>Confirmation</DialogTitle>
             <DialogContent>Are you sure you want to delete?</DialogContent>

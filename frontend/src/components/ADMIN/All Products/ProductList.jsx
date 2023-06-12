@@ -42,6 +42,8 @@ const ProductList = ({ mode, loadUserSuccess }) => {
   // *{<------------------------------- USE SELECTOR ------------------------------------->}
   const { generalLoading } = useSelector((state) => state.generalLoading);
   const { products } = useSelector((state) => state.AllProductList);
+  const { deleteProduct_Success } = useSelector((state) => state.DeleteProduct);
+
   const { bgColors } = useSelector((state) => state.Colors);
 
   // *{<------------------------------- USE-STATE------------------------------------->}
@@ -82,7 +84,8 @@ const ProductList = ({ mode, loadUserSuccess }) => {
       field: "stock",
       headerClassName: "headerBgColor",
       headerName: "Stock",
-      minWidth: 170,
+      minWidth: 200,
+      flex:0.5,
     },
     {
       field: "price",
@@ -156,7 +159,12 @@ const ProductList = ({ mode, loadUserSuccess }) => {
     } else {
       dispatch(getProductListAction());
     }
-  }, [dispatch, loadUserSuccess, history]);
+
+    if (deleteProduct_Success===true) {
+      dispatch(getProductListAction());
+      
+    }
+  }, [dispatch, loadUserSuccess, history,deleteProduct_Success]);
 
   return (
     <Fragment>
@@ -168,7 +176,7 @@ const ProductList = ({ mode, loadUserSuccess }) => {
           id="productList"
           style={{ backgroundColor: mode ? "#000000" : "", color: "#ffffff" }}
         >
-          <Typography style={{color:bgColors?bgColors:""}}>All Products</Typography>
+          <Typography style={{color:bgColors?bgColors:mode?"#ffffff":"#000000"}} >All Products</Typography>
           <Dialog open={open} onClose={() => setOpen(!open)}>
             <DialogTitle>Confirmation</DialogTitle>
             <DialogContent>Are you sure you want to delete?</DialogContent>

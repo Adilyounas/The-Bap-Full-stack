@@ -1,18 +1,15 @@
 import React from "react";
 import "./loader.css";
-import {useSelector} from "react-redux"
-import goku from "../../../assets/goku.png";
-import ball from "../../../assets/ball.gif";
+import { useSelector } from "react-redux";
 
 const Loader = () => {
-const {modez} = useSelector(state=>state.Colors)
-
+  const { modez } = useSelector((state) => state.Colors);
 
   return (
-    <div id="loaderContaienr" style={{backgroundColor:modez?"black":""}}>
-      <img className="ball" src={ball} alt="energy ball" />
-
-      <img className="goku" src={goku} alt="goku" />
+    <div id="loaderContaienr" style={{ backgroundColor: modez ? "black" : "" }}>
+      <div className="loadercontainer" style={{ backgroundColor: modez ? "transparent" : "" }}>
+        <span class="loader" style={{ backgroundColor: modez ? "transparent" : "",color:modez?"#ffffff":"#000000" }}>Loading...</span>
+      </div>
     </div>
   );
 };

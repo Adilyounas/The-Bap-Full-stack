@@ -10,9 +10,11 @@ const generalLoading = createSlice({
   reducers: {
     GeneralLoadingTrue: (state) => {
       state.generalLoading = true;
+
     },
     GeneralLoadingFalse: (state) => {
       state.generalLoading = false;
+
     },
   },
 });

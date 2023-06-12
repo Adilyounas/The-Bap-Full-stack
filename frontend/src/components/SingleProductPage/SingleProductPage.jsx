@@ -39,6 +39,7 @@ const SingleProductPage = ({ mode }) => {
   const { bgColors } = useSelector((state) => state.Colors);
   const { product } = useSelector((state) => state.SingleProduct);
   const { reviews } = useSelector((state) => state.Reviews);
+  const { addReviewsSuccess } = useSelector((state) => state.AddReview);
 
   const { generalLoading } = useSelector((state) => state.generalLoading);
 
@@ -53,12 +54,12 @@ const SingleProductPage = ({ mode }) => {
 
   // *{<------------------------ REGULAR FUNCTIONS  -------------------------->}
 
-  const goup = () => {
-    window.scroll({
-      top: 700,
-      behavior: "smooth",
-    });
-  };
+  // const goup = () => {
+  //   window.scroll({
+  //     top: 700,
+  //     behavior: "smooth",
+  //   });
+  // };
   const modalSubmitReviewFormHandler = (e) => {
     e.preventDefault();
     setReviewModalOpen(false);
@@ -68,7 +69,7 @@ const SingleProductPage = ({ mode }) => {
     formData.set("comment", comment);
     dispatch(addReview(formData));
     setReviewSubmited(!reviewSubmited);
-    goup();
+    // goup();
   };
 
   const incrementHandler = () => {
@@ -98,13 +99,14 @@ const SingleProductPage = ({ mode }) => {
   // TODO{<------------------------ USE EFFECT HOOK  --------------------------->}
 
   useEffect(() => {
-    if (reviewSubmited) {
+    if (addReviewsSuccess === true) {
+      dispatch(getSingleProduct(productId));
       dispatch(getReviews(productId));
     }
     dispatch(getReviews(productId));
 
     dispatch(getSingleProduct(productId));
-  }, [dispatch, productId, reviewSubmited]);
+  }, [dispatch, productId, addReviewsSuccess]);
 
   // *{<---------------------------   RETURN STATEMENT   -------------------------->}
   return (

@@ -5,7 +5,7 @@ import "./header.css";
 
 // *{<---------------------   IMPORTING FROM OTHER FILES  ------------------------------->}
 import logo from "../../assets/logo2.svg";
-import { setBgColors ,setModez} from "../../Redux/Reducers/Theming";
+import { setBgColors, setModez } from "../../Redux/Reducers/Theming";
 
 // *{<---------------------  REGULAR LIBARARIES ------------------------------->}
 import { NavLink } from "react-router-dom";
@@ -27,18 +27,15 @@ import { Badge, Button, Drawer, Modal, Tooltip } from "@mui/material";
 
 const bgColorVar = [
   "#ffaa00",
-
   "#045c6a",
   "#ce5a48",
   "#e8a679",
-
   "#6d6df2",
   "#ea0a07",
-  "#fdf6ee",
+  "#000000",
 ];
 
 const Header = ({ mode, setMode }) => {
-
   // *{<-------------------    USEDISPATCH, USENAVIGATE, USEPARAMS     ---------------------->}
   const dispatch = useDispatch();
 
@@ -57,19 +54,18 @@ const Header = ({ mode, setMode }) => {
     setOpenDrawer(false);
   };
 
-  const lightModeHandler = ()=>{
-    setMode(false)
-    dispatch(setModez(false))
+  const lightModeHandler = () => {
+    setMode(false);
+    dispatch(setModez(false));
+  };
 
-  }
-
-  const darkModeHandler = ()=>{
-    setMode(true)
-    dispatch(setModez(true))
-  }
+  const darkModeHandler = () => {
+    setMode(true);
+    dispatch(setModez(true));
+  };
 
   const colorPickerHandler = (e) => {
-    if (e.target.innerText === "#fdf6ee") {
+    if (e.target.innerText === "#000000") {
       localStorage.removeItem("colors");
 
       window.location.reload();
@@ -82,8 +78,7 @@ const Header = ({ mode, setMode }) => {
     }
   };
 
-    // *{<---------------------------   RETURN STATEMENT   -------------------------->}
-
+  // *{<---------------------------   RETURN STATEMENT   -------------------------->}
 
   return (
     <div className="headerContainer">

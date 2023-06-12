@@ -1,5 +1,6 @@
 import { toast } from "react-hot-toast";
 import {
+  allUser_Admin_initiated,
   allUser_Admin_RequestSuccess,
   allUser_Admin_RequestFail,
 } from "../../Reducers/Admin/userList";
@@ -15,6 +16,8 @@ export const getUserListAction = () => async (dispatch) => {
   try {
     dispatch(GeneralLoadingTrue());
     const { data } = await axios.get(`/api/v1/admin/getAllUsers`);
+    dispatch(allUser_Admin_initiated());
+
     dispatch(allUser_Admin_RequestSuccess(data));
     dispatch(GeneralLoadingFalse());
   } catch (error) {

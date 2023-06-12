@@ -13,7 +13,13 @@ const AllProductList = createSlice({
   initialState,
   reducers: {
 
+    allProducts_Admin_initializing: (state, action) => {
+      state.allProduct_Admin_Success = null;
+      state.message = "";
 
+      state.products = [];
+
+    },
     allProducts_Admin_RequestSuccess: (state, action) => {
       state.allProduct_Admin_Success = action.payload.success;
       state.products = action.payload.products;
@@ -28,6 +34,7 @@ const AllProductList = createSlice({
 export default AllProductList.reducer;
 
 export const {
+  allProducts_Admin_initializing,
     allProducts_Admin_RequestSuccess,
     allProducts_Admin_RequestFail,
 } = AllProductList.actions;

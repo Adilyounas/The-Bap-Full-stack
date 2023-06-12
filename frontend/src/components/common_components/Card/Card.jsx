@@ -75,7 +75,7 @@ const Card = ({ product, bgColors, mode }) => {
           </div>
           <Typography>{product.description}</Typography>
           <Rating
-         
+         style={{color:bgColors?bgColors:"#000000"}}
             name="half-rating-read"
             value={product.ratings}
             precision={0.5}

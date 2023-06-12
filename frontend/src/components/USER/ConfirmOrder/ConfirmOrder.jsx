@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 const orderSummary = JSON.parse(localStorage.getItem("orderSummary"));
 
-const ConfirmOrder = ({ loadUserSuccess,mode }) => {
+const ConfirmOrder = ({ loadUserSuccess, mode }) => {
   // *{<-------------------    USEDISPATCH, USENAVIGATE, USEPARAMS     ---------------------->}
   const history = useNavigate();
 
@@ -43,15 +43,18 @@ const ConfirmOrder = ({ loadUserSuccess,mode }) => {
   return (
     <>
       <Titles title={"Confirm Order"} />
-      <div id="confirmOrderContainer" style={{
-            backgroundColor: mode ? "#000000" : "#ffffff",
-            color: mode ? "#ffffff" : "#000000"
-          }}>
+      <div
+        id="confirmOrderContainer"
+        style={{
+          backgroundColor: mode ? "#000000" : "#ffffff",
+          color: mode ? "#ffffff" : "#000000",
+        }}
+      >
         <StepperComponent mode={mode} activeStep={1} />
         <div className="mainContainer">
           <div className="orderDetails">
             <div>
-              <h2  style={{color:mode?bgColors:""}}>Shipping Info</h2>
+              <h2  style={{color:bgColors?bgColors:""}}>Shipping Info</h2>
               <div className="userDetails">
                 <h3>Name:</h3>
                 <p>{user && user.name}</p>
@@ -70,7 +73,7 @@ const ConfirmOrder = ({ loadUserSuccess,mode }) => {
 
             {/*  */}
             <div className="userCartDetails">
-              <h2 style={{color:mode?bgColors:""}}>Your Cart Items</h2>
+              <h2 style={{color:bgColors?bgColors:""}}>Your Cart Items</h2>
 
               {cartItems &&
                 cartItems.map((item) => (
@@ -96,24 +99,30 @@ const ConfirmOrder = ({ loadUserSuccess,mode }) => {
           </div>
           <div className="orderSummary">
             <h2>Order Summary</h2>
-            <div>
-              <h3>Subtotal:</h3>
-              <p>${orderSummary && orderSummary.subTotal}</p>
-            </div>
-            <div>
-              <h3>ShippingTax:</h3>
-              <p>${orderSummary && orderSummary.shippingTax}</p>
-            </div>
+            {cartItems &&
+              cartItems.map((item) => (
+                <>
+                  <div>
+                    <h3>Subtotal:</h3>
+                    <p>${item.price * item.quantity}</p>
+                  </div>
+                  <div>
+                    <h3>ShippingTax:</h3>
+                    <p>${orderSummary && orderSummary.shippingTax}</p>
+                  </div>
 
-            <div>
-              <h3>GST:</h3>
-              <p>${orderSummary && orderSummary.tax}</p>
-            </div>
+                  <div>
+                    <h3>GST:</h3>
+                    <p>${orderSummary && orderSummary.tax}</p>
+                  </div>
 
-            <div>
-              <h3>Total:</h3>
-              <p>${orderSummary && orderSummary.Total}</p>
-            </div>
+                  <div>
+                    <h3>Total:</h3>
+                    <p>${orderSummary && orderSummary.Total}</p>
+                  </div>
+                </>
+              ))}
+
             <button onClick={proceedToPaymentHandler}>
               Proceed To Payment
             </button>

@@ -40,6 +40,8 @@ const Orderlist = ({ mode, loadUserSuccess }) => {
   // *{<--------------- USESELECTOR ------------------->}
   const { generalLoading } = useSelector((state) => state.generalLoading);
   const { Orders } = useSelector((state) => state.AllOrderList);
+  const { deleteOrder_Success } = useSelector((state) => state.DeleteOrder);
+
   const { bgColors } = useSelector((state) => state.Colors);
 
 
@@ -160,7 +162,12 @@ const Orderlist = ({ mode, loadUserSuccess }) => {
     } else {
       dispatch(getOrderListAction());
     }
-  }, [dispatch, loadUserSuccess, history]);
+
+    if (deleteOrder_Success===true) {
+      dispatch(getOrderListAction());
+      
+    }
+  }, [dispatch, loadUserSuccess, history,deleteOrder_Success]);
 
   // *{<--------------------- RETURN STATEMENT  ---------------------------->}
 

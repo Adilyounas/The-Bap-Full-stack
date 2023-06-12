@@ -1,5 +1,6 @@
 import { toast } from "react-hot-toast";
 import {
+  allProducts_Admin_initializing,
   allProducts_Admin_RequestSuccess,
   allProducts_Admin_RequestFail,
 } from "../../Reducers/Admin/productList";
@@ -15,6 +16,8 @@ export const getProductListAction = () => async (dispatch) => {
   try {
     dispatch(GeneralLoadingTrue());
     const { data } = await axios.get(`/api/v1/admin/allProducts`);
+    dispatch(allProducts_Admin_initializing());
+
     dispatch(allProducts_Admin_RequestSuccess(data));
     dispatch(GeneralLoadingFalse());
   } catch (error) {
